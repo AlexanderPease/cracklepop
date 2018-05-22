@@ -15,18 +15,16 @@ class CracklePop(object):
         """Min is lowest input, Max is highest input."""
         self.min = min
         self.max = max
-        self.values = []
-        self.__calculate_values()
 
-    def __calculate_values(self):
-        """Calculate all self.values for instance."""
+    def output(self):
+        """Returns a list of all outputs."""
+        output = []
         for i in xrange(self.min, self.max + 1):
-            self.values.append(
-                self.__value_for(i)
-            )
+            output.append(self.value_for(i))
+        return output
 
-    def __value_for(self, num):
-        """Returns value for a specific input number/value."""
+    def value_for(self, num):
+        """Returns value for a specific input."""
         if not num % 3 and not num % 5:
             return 'CracklePop'
         elif not num % 5:
@@ -42,26 +40,22 @@ class TestCracklePop(unittest.TestCase):
 
     def test_sample_values(self):
         """Spot check known values."""
-        self.assertTrue(self.test.values[3 - 1] == 'Crackle')
-        self.assertTrue(self.test.values[20 - 1] == 'Pop')
-        self.assertTrue(self.test.values[45 - 1] == 'CracklePop')
+        self.assertTrue(self.test.value_for(3) == 'Crackle')
+        self.assertTrue(self.test.value_for(20) == 'Pop')
+        self.assertTrue(self.test.value_for(45) == 'CracklePop')
 
     def test_divisible_by_3(self):
         """No values should be divisible by 3."""
-        for value in self.test.values:
+        for value in self.test.output():
             if isinstance(value, int):
                 self.assertTrue(value % 3)
 
     def test_divisible_by_5(self):
         """No values should be divisible by 3."""
-        for value in self.test.values:
+        for value in self.test.output():
             if isinstance(value, int):
                 self.assertTrue(value % 5)
 
 
 if __name__ == "__main__":
-    # print(CracklePop().values)
-    test = TestCracklePop()
-    test.test_sample_values()
-    test.test_divisible_by_3()
-    test.test_divisible_by_5()
+    print(CracklePop().output())
