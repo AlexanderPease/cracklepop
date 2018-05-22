@@ -57,5 +57,12 @@ class TestCracklePop(unittest.TestCase):
                 self.assertTrue(value % 5)
 
 
+def pprint(input, delimiter=', '):
+    """Pretty printing of a list of various object types."""
+    print(
+        ', '.join(str(i) for i in input)
+    )
+
+
 if __name__ == "__main__":
-    print(CracklePop().output())
+    pprint(CracklePop().output())
